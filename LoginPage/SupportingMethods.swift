@@ -25,9 +25,13 @@ func keyboardHeight() -> Observable<CGFloat> {
 }
 
 extension UIViewController {
-  func showAlert(title: String, message: String, completion: (() -> Void)?) {
+  func showAlert(title: String, message: String, okAction: (() -> Void)?) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "OK!", style: .default)
+    let okAction = UIAlertAction(title: "OK!", style: .default) { _ in
+      if let okAction = okAction {
+        okAction()
+      }
+    }
     alert.addAction(okAction)
     present(alert, animated: true)
     

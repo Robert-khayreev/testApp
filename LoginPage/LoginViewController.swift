@@ -79,13 +79,14 @@ class LoginViewController: UIViewController {
             let stringToShow = "The temprature in \(city) is \(celcius)"
             self?.showAlert(title: "Weather",
                             message: stringToShow,
-                            completion: { self?.auth.logOut() })
+                            okAction: { self?.auth.logOut() })
             
           }
         case .loggedOut:
           print("logged out")
         case .error(let error):
-          self?.showAlert(title: "Error", message: "\(error)", completion: nil)
+          self?.showAlert(title: "Error", message: "\(error)", okAction: nil)
+          self?.auth.userState.value = .loggedOut
         }
         
       }
